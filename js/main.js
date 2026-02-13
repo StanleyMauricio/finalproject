@@ -1,13 +1,19 @@
 import { createModal } from './modal.js';
 import { saveFavorite, getFavorites } from './local.js';
+import { loadHeaderFooter } from './utils.mjs';
 
-document.addEventListener('DOMContentLoaded', () => {
+
+document.addEventListener('DOMContentLoaded', async () => {
+  
+  await loadHeaderFooter();
+  
   updateFooterInfo();
   setupMenuToggle();
+  
+
   init();
 });
 
-//  Initialize
 async function init() {
   try {
     const items = await fetchItems();
@@ -25,7 +31,7 @@ async function init() {
 //  Load local JSON
 async function fetchItems() {
   try {
-    const res = await fetch('data/items.json', { cache: 'no-store' });
+    const res = await fetch('js/items.json', { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     if (!Array.isArray(data) || data.length < 1)
