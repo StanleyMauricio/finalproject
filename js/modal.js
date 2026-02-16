@@ -26,7 +26,7 @@ export function setupNavAndAccessibility() {
   });
 }
 
-/* Modal factory accesible sencillo */
+/* Modal factory  */
 export function createModal() {
   let modalOverlay, modalDialog, lastFocused;
 
@@ -41,7 +41,7 @@ export function createModal() {
     modalOverlay.appendChild(modalDialog);
     document.body.appendChild(modalOverlay);
 
-    // close when clicking fuera del dialogo
+    // close 
     modalOverlay.addEventListener('click', (e) => {
       if (e.target === modalOverlay) close();
     });

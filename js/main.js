@@ -68,7 +68,7 @@ function renderItems(items) {
   const slice = items.slice(0, 15);
 
   slice.forEach(item => {
-    const imagePath = item.image || `/public/images/textileriawood.webp`;
+    const imagePath = item.image || `public/images/textileriawood.webp`;
     const card = document.createElement('article');
     card.className = 'card';
     card.setAttribute('tabindex', '0');
