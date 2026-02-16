@@ -32,3 +32,26 @@ export async function loadHeaderFooter() {
     console.error("Error", error);
   }
 }
+export async function getPeruData() {
+  try {
+    const response = await fetch("https://restcountries.com/v3.1/name/peru?fullText=true");
+    if (!response.ok) throw new Error("Error retrieving data from Peru");
+    const data = await response.json();
+    return data[0]; 
+  } catch (error) {
+    console.error("Rest Countries API Error:", error);
+  }
+}
+// Reemplaza 'TU_API_KEY' con tu clave real de ipstack
+const IPSTACK_KEY = '589141b468aedb1faff98a71be46def6'; 
+
+export async function getUserLocation() {
+  try {
+    const response = await fetch(`http://api.ipstack.com/check?access_key=${IPSTACK_KEY}`);
+    if (!response.ok) throw new Error("Error");
+    const data = await response.json();
+    return data; // Contiene ciudad, país, etc.
+  } catch (error) {
+    console.warn("ipstack API Error :", error);
+  }
+}

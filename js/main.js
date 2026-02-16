@@ -1,6 +1,6 @@
 import { createModal } from './modal.js';
 import { saveFavorite, getFavorites } from './local.js';
-import { loadHeaderFooter } from './utils.mjs';
+import { loadHeaderFooter,getPeruData,getUserLocation} from './utils.mjs';
 
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -9,8 +9,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   updateFooterInfo();
   setupMenuToggle();
-  
-
+  const peru = await getPeruData();
+  if (peru) {
+    console.log("Datos oficiales de Perú cargados:", peru.name.common);
+    
+    const flagImg = document.querySelector("#peru-flag");
+    if (flagImg) flagImg.src = peru.flags.svg;
+  }
+1
+  const location = await getUserLocation();
+  if (location && location.city) {
+    const welcomeMsg = document.querySelector("#welcome-visitor");
+    if (welcomeMsg) {
+      welcomeMsg.textContent = `Welcome visitor from ${location.city}!`;
+    }
+  }
   init();
 });
 
@@ -55,11 +68,12 @@ function renderItems(items) {
   const slice = items.slice(0, 15);
 
   slice.forEach(item => {
+    const imagePath = item.image || `/public/images/textileriawood.webp`;
     const card = document.createElement('article');
     card.className = 'card';
     card.setAttribute('tabindex', '0');
     card.innerHTML = `
-      <img src="images/placeholder.webp" alt="${item.name}" loading="lazy" width="400" height="240">
+      <img src="${imagePath}"alt="${item.name}" loading="lazy" width="400" height="240">
       <div class="card-body">
         <h4>${item.name}</h4>
         <p><strong>Region:</strong> ${item.region}</p>
@@ -168,3 +182,13 @@ function setupMenuToggle() {
     menuButton.textContent = menuButton.textContent === "☰" ? "✖" : "☰";
   });
 }
+const contactForm = document.querySelector('#contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        const name = document.querySelector('#name').value;
+        if (name.length < 3) {
+            e.preventDefault();
+            alert("Please enter a valid full name.");
+        }
+    });
+} 

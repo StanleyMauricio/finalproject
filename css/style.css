@@ -12,6 +12,8 @@
   --text-dark: #1B1B1E;
   --text-light: #D8DBE2;
   --text-secondary: #A9BCD0;
+  --typeface: #333333; 
+    --background: #ffffff;
 
 }
 
@@ -158,4 +160,78 @@ footer p {
 
 .contact-form button:hover {
   background-color: var(--accent1-color);
+}
+/* --- APIs --- */
+#api-data-bar {
+    background-color: var(--accent-1-color);
+    color: var(--text-light);          
+    padding: 10px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 0.85rem;
+    border-bottom: 2px solid var(--accent-2-color); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap; /
+}
+#peru-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#peru-info img {
+    width: 25px; 
+    height: auto;
+    border-radius: 2px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+
+#welcome-msg {
+    font-weight: bold;
+    color: var(--secondary-color); 
+}
+
+
+@media (max-width: 600px) {
+    #api-data-bar {
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px;
+    }
+     #mainNav {
+        display: none; 
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--accent1-color);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        z-index: 1000;
+        
+    }
+    #mainNav.show {
+        display: flex;
+        animation: slideDown 0.3s ease-out;
+    }
+  }
+ 
+   @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+} 
+  .item-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    
+}
+
+.item-card:hover {
+    transform: translateY(-10px); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
 }
